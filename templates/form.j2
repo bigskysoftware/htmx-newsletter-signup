@@ -1,0 +1,40 @@
+
+<form action="/signup" {# include fallback options for nojs users #}
+      method="post"
+      hx-post="/signup"  {# post to the same URL #}
+      hx-swap="outerHTML" autocomplete="off"  {# replace entire form  #}
+      hx-disabled-elt="find fieldset">  {# add disabed attribute to the fieldset (why can't forms be disabled?!?) #}
+    <hgroup>
+        <h1>Subscribe!</h1>
+        <h3>Don't miss any of the action!</h3>
+    </hgroup>
+    <fieldset class="grid">
+       {# fairly standard email input #}
+        <input type="email"
+               aria-label="Email address"
+               name="email"
+               {% if email %}
+                  {# hyperscript: if there is a non-empty email, autofocus and select the text of this input #}
+                   _="on load select() me"
+                  {# if there's an email, emit the standard autofocus attribute to focus the input #}
+                  autofocus
+               {% endif %}
+               placeholder="you@example.com"
+               {% if error %}
+                  {# if there is an error, add some aria attributes indicating so #}
+                   aria-invalid="true"
+                   aria-description="error"
+               {% endif %}
+               required
+               {# include an email if any exists #}
+               value="{{ email }}">
+        {# hyperscript: update the text of the button when a submit occurs #}
+        <button _="on submit from the closest <form/> put 'Submitting...' into me">
+            Subscribe
+        </button>
+    </fieldset>
+    {# display the error message #}
+    {% if error %}
+        Error: {{ error }}
+    {% endif %}
+</form>

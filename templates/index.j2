@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>htmx Newsletter Signup Form Demo</title>
+
+    {# pico.css for reasonable default styling #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    {# htmx #}
+    <script src="https://unpkg.com/htmx.org@1.9.8"></script>
+    {# hyperscript for scripting, because i prefer it #}
+    <script src="https://unpkg.com/hyperscript.org"></script>
+
+    {# some basic styling to show a transition and make the layout not awful #}
+    <style>
+        .thank-you.htmx-added {
+            opacity: 0;
+        }
+        .thank-you {
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+        .demo {
+            max-width: 512px;
+            text-align: center;
+            margin: 64px auto auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <section>
+
+        <h1>
+        Newsletter Signup Challenge
+    </h1>
+
+    <p>
+        This is an implementation of an htmx-powered version of the Remix-based newsletter signup
+        form here: <a href="https://www.youtube.com/watch?v=jd_bin5HPrw">https://www.youtube.com/watch?v=jd_bin5HPrw</a>
+    </p>
+
+    <p>Enter <code>bad@email.com</code> to see a validation error.</p>
+
+    </section>
+
+    <hr/>
+
+    <section class="demo" aria-live="polite">
+        {% if thank_you %}
+          {# nojs fallback option, use this template as the thank you page too #}
+          {% include 'thank_you.j2' %}
+        {% else %}
+          {# most of the interesting stuff is in the form.j2 file, but note the aria-live annotation #}
+          {% include 'form.j2' %}
+        {% endif %}
+    </section>
+</main>
+</body>
+</html>
