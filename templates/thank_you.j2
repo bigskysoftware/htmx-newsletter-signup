@@ -1,5 +1,5 @@
 <hgroup class="thank-you">
-    <h1 _="on load focus() me" tabindex="-1">You're subscribed!</h1>
+    <h1 autofocus tabindex="-1">You're subscribed!</h1>
     <h4>Please check your email to confirm your subscription.</h4>
     {#  get the root page and pass along the current email to repopulate the input  #}
     <a href="/?email={{ email }}" hx-target="body" hx-get="/?email={{ email }}">Start over</a>
